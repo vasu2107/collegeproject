@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-light bg-dark">
         <img src="https://pbs.twimg.com/profile_images/1439953850471911426/s4pE9SYa_400x400.jpg" alt="random image">
-        <h1><i>Vasu Agarwal</i></h1>
+        <h1><i><%= name %></i></h1>
         <form class="form-inline">
             <button class="btn btn-outline-danger" type="button">Pending</button>
             <button class="btn btn-outline-success" type="button">Completed</button>
@@ -31,9 +31,10 @@
                     <p class="card-text">
                         <%=user.email%>
                     </p>
-                    <form action="/task/<%= user._id %>/add" method="post">
-                      <textarea name="task" id="" cols="18" rows="1" style="background-color: lightgray;" placeholder="TYPE HERE"></textarea>
-                        <button  class="btn btn-outline-success">add task</button>
+                    <form action="/task/add" method="post">
+                      <input type="hidden" name="asignee" value="<%=user.id%>" />
+                      <textarea name="description" id="" cols="18" rows="1" style="background-color: lightgray;" placeholder="Add Title Description"></textarea>
+                      <button  class="btn btn-outline-success" type="submit">add task</button>
                     </form>
 
                 </div>

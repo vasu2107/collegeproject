@@ -8,11 +8,11 @@ const router = express.Router();
 
 router.post('/add', getAuthorizationMiddleware(isAdmin), async (req, res) => {
    const { id } = req.user;
-   const { task: description } = req.body;
+   const { description, asignee } = req.body;
    const time = Date.now();
 
    const task = new Task({ 
-      id: uuidv4(), description, created_date: time, modified_date: time, userId: id
+      id: uuidv4(), description, created_date: time, modified_date: time, asignee, creator: id,
    });
 
    await task.save();
@@ -21,8 +21,9 @@ router.post('/add', getAuthorizationMiddleware(isAdmin), async (req, res) => {
 });
 
 router.post('/update/:id', async (req, res) => {
-   const { id: taskId, description, status } = req.params;
+   const { id: taskId } = req.params;
    const { id: userId } = req.user;
+   const { description, status } = req.body;
 
    const task = await Task.findOne({ id: taskId });
 
@@ -30,7 +31,7 @@ router.post('/update/:id', async (req, res) => {
       return res.redirect('/index');
    }
 
-   if (task.userId !== userId) {
+   if (!task.creator === userId && !task.asignee === userId) {
       res.clearCookie(process.env.AUTH_COOKIE_NAME);
       return res.render("login.ejs", { errorMessage: 'Tries to access unauthorised asset' });
    }

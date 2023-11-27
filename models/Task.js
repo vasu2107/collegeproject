@@ -6,7 +6,7 @@ const taskSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    userId: {
+    asignee: {
         type: String,
         required: true,
     },
@@ -25,7 +25,11 @@ const taskSchema = mongoose.Schema({
     modified_date: {
         type: Number,
         required: true,
-    }
+    },
+    creator: {
+        type: String,
+        required: true,
+    },
 });
 
 const Task = mongoose.model("Task", taskSchema);

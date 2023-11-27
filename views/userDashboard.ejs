@@ -40,10 +40,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Sr. No.</th>
-                                        <th scope="col">Task</th>
+                                        <th scope="col">Description</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Created </th>
-                                        <th scope="col">Completed</th>
+                                        <th scope="col">Updated</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
@@ -51,15 +51,12 @@
 
                                     <tbody>
                                         <%i=1%>
-                                <%for(let task of tasks){%>
+                                        <%for(let task of tasks){%>
                                         <tr class="align-middle">
-
                                             <td scope="row"><%=i%></td>
-
-
                                             <td class="align-middle">
                                                 <span>
-                                                    <%= task.task %>
+                                                    <%= task.description %>
                                                 </span>
                                             </td>
                                             <td class="align-middle">
@@ -69,48 +66,31 @@
                                             </td>
                                             <td class="align-middle">
                                                 <span>
-                                                    <%= task.created_date.toString().split(" ").slice(1,4).join(" ") %>
-                                                    
+                                                    <%= new Date(task.created_date).toLocaleString() %>
                                                 </span>
                                             </td>
                                             <td class=" align-middle">
-                                                        <h6>
-                                                            <%if(task.completed_date==null){%>
-                                                                <%= task.completed_date %>
-                                                                
-                                                            <%}else{%>
-                                                                <%= task.completed_date.toString().split(" ").slice(1,4).join(" ") %>
-                                                            <%}%>
-                                                            
-                                                        </h6>
+                                                <span>
+                                                    <%= new Date(task.modified_date).toLocaleString() %>
+                                                </span>
                                             </td>
                                             <td class=" align-middle">
-                                                                    <span>
-                                                                        <form
-                                                                            action="/task/<%= id %>/task?_method=patch"
-                                                                            method="post"><button type="submit"
-                                                                                class="btn btn-success ms-1">Finished</button>
-                                                                        </form>
-                                                                    </span>
+                                                <span>
+                                                    <form action="/task/update/<%= id %>/" method="post">
+                                                        <input type="hidden" name="status" value="DONE" />
+                                                        <button type="submit" class="btn btn-success ms-1">Finished</button>
+                                                    </form>
+                                                </span>
                                             </td>
-
                                         </tr>
-
 
                                         <%i=i+1%>
                                         <%}%>
-
-
                                     </tbody>
                                    
                             </table>
-                             
-                           
-
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
