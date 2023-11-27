@@ -62,6 +62,4 @@ router.get('/logout', (_, res) => {
     return res.redirect('/index');
 });
 
-router.get('/signup', (_, res) => res.render('signup.ejs'));
-
 module.exports = router;

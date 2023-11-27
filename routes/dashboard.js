@@ -21,6 +21,8 @@ const dashboardRouteHandler = async (req, res) => {
 
 router.get("/", dashboardRouteHandler);
 router.post("/", dashboardRouteHandler);
+router.get('/signup', (_, res) => res.render('signup.ejs'));
+router.get('/login', (_, res) => res.render('login.ejs'));
 
 module.exports = router;
 
