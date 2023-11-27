@@ -10,20 +10,22 @@
 
 </head>
 
-<body>
+<body style="background-color: saddlebrown;">
     <nav class="navbar navbar-light bg-dark">
         <img src="https://pbs.twimg.com/profile_images/1439953850471911426/s4pE9SYa_400x400.jpg" alt="random image">
         <h1><i>Vasu Agarwal</i></h1>
         <form class="form-inline">
-            <button class="btn btn-outline-danger" type="button">Pending</button>
-            <button class="btn btn-outline-success" type="button">Completed</button>
+            <button class="btn btn-outline-primary" type="button">manage tasks</button> 
+        </form>
+        <form class="form-inline">
+            <button class="btn btn-outline-danger" type="button">sign out</button> 
         </form>
     </nav>
 
     <div style="display: flex; flex-wrap: wrap;">
         <%for(let user of usersdata){%>
-            <div class="card" style="width: 12rem;  margin: 8px; background: linear-gradient(30deg, lightgray,black );">
-                <img class="card-img-top" src="<%=user.url%>" alt="Card image cap">
+            <div class="card  btn-outline-danger" style="width: 18rem; margin: 4px;background-color: rgba(117, 95, 160, 0.277);  ">
+                
                 <div class="card-body">
                     <h5 class="card-title">
                         <%=user.name%>
