@@ -21,8 +21,8 @@ const createTokenAndRedirectToDashboard = async (user, res) => {
 
 // login route
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ name: username, password: hashString(password) });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email, password: hashString(password) });
   
     if (!user) {
       return res.render("login.ejs", { errorMessage: 'Invalid username or password' });
