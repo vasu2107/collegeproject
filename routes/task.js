@@ -1,6 +1,6 @@
 const express = require("express");
 const { v4: uuidv4 } = require('uuid');
-const User = require('../models/User');
+const Task = require('../models/Task');
 const { getAuthorizationMiddleware } = require('../middlewares/auth');
 const { isAdmin } = require('../utils/user');
 
