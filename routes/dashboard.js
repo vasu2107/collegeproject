@@ -13,7 +13,7 @@ const dashboardRouteHandler = async (req, res) => {
         return res.render("adminDashboard.ejs",{ usersdata: users, name: user.name, id: user.id });
     }
 
-    const tasks = await Task.find({ id: user.id });
+    const tasks = await Task.find({ asignee: user.id });
     return res.render("userDashboard.ejs", {
         tasks, name: user.name, id: user.id,
     });
