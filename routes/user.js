@@ -53,4 +53,6 @@ router.post('/signup', async (req, res) => {
       }
 });
 
+router.get('/signup', (_, res) => res.render('signup.ejs'));
+
 module.exports = router;
