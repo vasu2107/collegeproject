@@ -40,6 +40,7 @@ router.post('/update/:id', async (req, res) => {
 
    task.description = description || task.description;
    task.status = status || task.status;
+   task.modified_date = Date.now();
 
    await task.save();
 
