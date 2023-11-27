@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const UserRoute = require("./routes/user");
 const TaskRoute = require("./routes/task");
@@ -12,6 +13,7 @@ dotenv.config();
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
