@@ -55,6 +55,12 @@ router.post('/signup', async (req, res) => {
       }
 });
 
+router.get('/logout', (_, res) => {
+    const authCookieName = process.env.AUTH_COOKIE_NAME;
+    res.clearCookie(authCookieName);
+    return res.redirect('/index');
+});
+
 router.get('/signup', (_, res) => res.render('signup.ejs'));
 
 module.exports = router;
