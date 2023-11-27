@@ -45,7 +45,9 @@ router.post('/signup', async (req, res) => {
   
           await newUser.save();
   
-          return createTokenAndRedirectToDashboard(newUser, res);
+          return createTokenAndRedirectToDashboard({
+            name, email, role: USER_ROLE.STANDARD_USER, id,
+          }, res);
       } catch (error) {
           return res.render("signup.ejs", {
               errorMessage: 'Something went wrong. Failed To Register user',
