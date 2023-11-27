@@ -7,8 +7,8 @@ const { isAdmin } = require('../utils/user');
 const router = express.Router();
 
 const dashboardRouteHandler = async (req, res) => {
-    console.log("dashboard route");
-    if (isAdmin(req.user)) {
+    const { user } = req;
+    if (isAdmin(user)) {
         const users = await User.find();
         return res.render("adminDashboard.ejs",{ usersdata: users });
     }
