@@ -19,8 +19,8 @@ const dashboardRouteHandler = async (req, res) => {
     });
 };
 
-router.get("/", authenticationMiddleware, dashboardRouteHandler);
-router.post("/", authenticationMiddleware, dashboardRouteHandler);
+router.get("/", dashboardRouteHandler);
+router.post("/", dashboardRouteHandler);
 
 module.exports = router;
 

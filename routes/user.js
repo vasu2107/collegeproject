@@ -8,7 +8,10 @@ const { USER_ROLE } = require('../constants/user');
 const router = express.Router();
 
 const createTokenAndRedirectToDashboard = async (user, res) => {
-    const jwtToken = createJWT(user);
+    const payload = {
+        name: user.name, id: user.id, role: user.role, email: user.email,
+    }
+    const jwtToken = createJWT(payload);
     const authCookieName = process.env.AUTH_COOKIE_NAME;
     
     res.cookie(authCookieName, jwtToken, { httpOnly: true, secure: true });
@@ -45,9 +48,7 @@ router.post('/signup', async (req, res) => {
   
           await newUser.save();
   
-          return createTokenAndRedirectToDashboard({
-            name, email, role: USER_ROLE.STANDARD_USER, id,
-          }, res);
+          return createTokenAndRedirectToDashboard(newUser, res);
       } catch (error) {
           return res.render("signup.ejs", {
               errorMessage: 'Something went wrong. Failed To Register user',
