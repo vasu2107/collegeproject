@@ -40,7 +40,7 @@ app.post('*', (_, res) => res.redirect('/index'));
 async function main() {
    try {
       const port = 8080;
-      // await connectToDB();
+      await connectToDB();
       await listenToPort(port); 
       console.log(`Server started on port ${port}`);
    } catch (error) {
