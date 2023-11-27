@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
     return createTokenAndRedirectToDashboard(user, res);
 });
   
-  // signup route
+// signup route
 router.post('/signup', async (req, res) => {
     try {
           const { name, email, password } = req.body;
