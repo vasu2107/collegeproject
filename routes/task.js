@@ -8,7 +8,7 @@ const { isAdmin } = require('../utils/user');
 const router = express.Router();
 
 router.post('/add', getAuthorizationMiddleware(isAdmin), async (req, res) => {
-   const { id } = req.user;
+   const { id, name } = req.user;
    const { description, asignee } = req.body;
    const time = Date.now();
 
@@ -19,7 +19,7 @@ router.post('/add', getAuthorizationMiddleware(isAdmin), async (req, res) => {
    await task.save();
 
    const users = await User.find();
-   return res.render("adminDashboard.ejs",{ usersdata: users, message: 'Task added successfully' });
+   return res.render("adminDashboard.ejs",{ usersdata: users, message: 'Task added successfully', name, id, });
 });
 
 router.post('/update/:id', async (req, res) => {
