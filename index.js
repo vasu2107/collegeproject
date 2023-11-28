@@ -33,11 +33,9 @@ const listenToPort = (port) => new Promise((resolve, reject) => {
    });
 });
 
-app.use('/user', UserRoute);
+app.use('/user', redirectIfLoggedInMiddleware, UserRoute);
 app.use('/task', authenticationMiddleware, TaskRoute);
 app.use('/index', authenticationMiddleware, DashboardRoute)
-app.get('/login', redirectIfLoggedInMiddleware, (_, res) => res.render('login.ejs'));
-app.get('/signup', redirectIfLoggedInMiddleware, (_, res) => res.render('signup.ejs'));
 app.get('*', (_, res) => res.redirect('/index'));
 app.post('*', (_, res) => res.redirect('/index'));
 
@@ -51,14 +49,6 @@ async function main() {
       console.log("Faled to start server", error);
    }
 }
-
-
-
-//home page
-app.get("/index", (req, res) => {
-   console.log(req.body);
-   res.render("index.ejs");
-});
 
 main();
 
