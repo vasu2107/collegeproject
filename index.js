@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const UserRoute = require("./routes/user");
 const TaskRoute = require("./routes/task");
 const DashboardRoute = require("./routes/dashboard");
-const { authenticationMiddleware } = require('./middlewares/auth');
+const { authenticationMiddleware, redirectIfLoggedInMiddleware } = require('./middlewares/auth');
 
 dotenv.config();
 
@@ -36,6 +36,8 @@ const listenToPort = (port) => new Promise((resolve, reject) => {
 app.use('/user', UserRoute);
 app.use('/task', authenticationMiddleware, TaskRoute);
 app.use('/index', authenticationMiddleware, DashboardRoute)
+app.get('/login', redirectIfLoggedInMiddleware, (_, res) => res.render('login.ejs'));
+app.get('/signup', redirectIfLoggedInMiddleware, (_, res) => res.render('signup.ejs'));
 app.get('*', (_, res) => res.redirect('/index'));
 app.post('*', (_, res) => res.redirect('/index'));
 

@@ -25,6 +25,29 @@ const authenticationMiddleware = async (req, res, next) => {
     }
 };
 
+/**
+ * This middleware verifies if thse user is already logged in using
+ * auth cookie and if yes the fill the user details in req.user and redirect 
+ * to home page otherwise continue with the request
+ * @returns 
+ */
+const redirectIfLoggedInMiddleware = async (req, res, next) => {
+    const authCookieName = process.env.AUTH_COOKIE_NAME;
+    const token = pathOr('', ['cookies', authCookieName], req);
+
+    if (isNilOrEmpty(token)) {
+        return next();
+    }
+
+    try {
+        const decoded = await verifyJWT(token);
+        req.user = decoded;
+        return res.redirect('/index');
+    } catch (error) {
+        return next();
+    }
+};
+
 const getAuthorizationMiddleware = (isAuthorised) => (req, res, next) => {
     const { user, } = req;
 
@@ -46,4 +69,5 @@ const getAuthorizationMiddleware = (isAuthorised) => (req, res, next) => {
 module.exports = {
     authenticationMiddleware,
     getAuthorizationMiddleware,
+    redirectIfLoggedInMiddleware,
 };
