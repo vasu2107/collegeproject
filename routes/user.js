@@ -4,6 +4,7 @@ const User = require('../models/User');
 const { createJWT } = require('../utils/jwt');
 const { hashString } = require('../utils/crypto');
 const { USER_ROLE } = require('../constants/user');
+const { redirectIfLoggedInMiddleware } = require('../middlewares/auth');
 
 const router = express.Router();
 
@@ -62,8 +63,8 @@ router.get('/logout', (_, res) => {
     return res.redirect('/index');
 });
 
-app.get('/login', (_, res) => res.render('login.ejs'));
+router.get('/login', redirectIfLoggedInMiddleware, (_, res) => res.render('login.ejs'));
 
-app.get('/signup', (_, res) => res.render('signup.ejs'));
+router.get('/signup', redirectIfLoggedInMiddleware, (_, res) => res.render('signup.ejs'));
 
 module.exports = router;
