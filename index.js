@@ -36,7 +36,7 @@ const listenToPort = (port) => new Promise((resolve, reject) => {
 });
 
 app.use('/user', UserRoute);
-app.use('/admin', AdminRoute);
+app.use('/admin', authenticationMiddleware, getAuthorizationMiddleware(isAdmin), AdminRoute);
 app.use('/task', authenticationMiddleware, TaskRoute);
 app.use('/index', authenticationMiddleware, DashboardRoute);
 // app.get('*', (_, res) => res.redirect('/index'));

@@ -3,7 +3,7 @@ const Task = require('../models/Task');
 
 const router = express.Router();
 
-const manageRaskHandler = async (req, res) => {
+const manageTaskHandler = async (req, res) => {
     const { user } = req;
 
     const tasks = await Task.find({ creator: user.id });
@@ -12,7 +12,7 @@ const manageRaskHandler = async (req, res) => {
     });
 };
 
-router.get("manageTasks", manageRaskHandler);
+router.get("abc", manageTaskHandler);
 
 module.exports = router;
 
