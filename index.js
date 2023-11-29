@@ -7,7 +7,9 @@ const methodOverride = require("method-override");
 const UserRoute = require("./routes/user");
 const TaskRoute = require("./routes/task");
 const DashboardRoute = require("./routes/dashboard");
-const { authenticationMiddleware } = require('./middlewares/auth');
+const AdminRoute = require("./routes/admin");
+const { authenticationMiddleware, getAuthorizationMiddleware } = require('./middlewares/auth');
+const { isAdmin } = require('./utils/user');
 
 dotenv.config();
 
@@ -35,7 +37,8 @@ const listenToPort = (port) => new Promise((resolve, reject) => {
 
 app.use('/user', UserRoute);
 app.use('/task', authenticationMiddleware, TaskRoute);
-app.use('/index', authenticationMiddleware, DashboardRoute)
+app.use('/index', authenticationMiddleware, DashboardRoute);
+app.use('/admin', authenticationMiddleware, getAuthorizationMiddleware(isAdmin), AdminRoute);
 app.get('*', (_, res) => res.redirect('/index'));
 app.post('*', (_, res) => res.redirect('/index'));
 

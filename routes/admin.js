@@ -1,0 +1,19 @@
+const express = require("express");
+const User = require('../models/User');
+const Task = require('../models/Task');
+
+const router = express.Router();
+
+const manageRaskHandler = async (req, res) => {
+    const { user } = req;
+
+    const tasks = await Task.find({ creator: user.id });
+    return res.render("manageTasks.ejs", {
+        tasks, name: user.name, id: user.id,
+    });
+};
+
+router.get("manageTasks", manageRaskHandler);
+
+module.exports = router;
+

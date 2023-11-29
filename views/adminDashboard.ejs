@@ -14,12 +14,14 @@
     <nav class="navbar navbar-light bg-dark">
         <img src="https://pbs.twimg.com/profile_images/1439953850471911426/s4pE9SYa_400x400.jpg" alt="random image">
         <h1><i><%= name %></i></h1>
-        <button class="btn btn-outline-primary" type="button" style="background-color:black; color: white;" >home</button> 
-        <form class="form-inline">
-            <button class="btn btn-outline-primary" type="button">manage tasks</button> 
+        <form class="form-inline" action="/index">
+            <button class="btn btn-outline-primary" type="button">Home</button>
+        </form>
+        <form class="form-inline" action="/admin/manageTasks" style="background-color: white;">
+            <button class="btn btn-outline-primary" type="button">Manage Tasks</button>
         </form>
         <form class="form-inline" action="/user/logout">
-            <button class="btn btn-outline-danger" type="submit">sign out</button> 
+            <button class="btn btn-outline-danger" type="button">sign out</button>
         </form>
     </nav>
 
