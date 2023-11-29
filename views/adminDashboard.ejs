@@ -14,15 +14,9 @@
     <nav class="navbar navbar-light bg-dark">
         <img src="https://pbs.twimg.com/profile_images/1439953850471911426/s4pE9SYa_400x400.jpg" alt="random image">
         <h1><i><%= name %></i></h1>
-        <form class="form-inline" action="/index">
-            <button class="btn btn-outline-primary" type="submit">Home</button>
-        </form>
-        <form class="form-inline" action="/admin/manageTasks" style="background-color: white;">
-            <button class="btn btn-outline-primary" type="submit">Manage Tasks</button>
-        </form>
-        <form class="form-inline" action="/user/logout">
-            <button class="btn btn-outline-danger" type="submit">sign out</button>
-        </form>
+        <a href="/index" class="btn btn-outline-primary" style="background-color: white;">Home</a>
+        <a href="/admin/manageTasks" class="btn btn-outline-primary">Manage Tasks</a>
+        <a href="/user/logout" class="btn btn-outline-primary">Sign Out</a>
     </nav>
 
     <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 10px;">
