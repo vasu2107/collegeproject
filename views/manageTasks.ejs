@@ -7,8 +7,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
 </head>
+
+<style>
+    .hide {
+        display: none;
+    }
+</style>
 
 <script>
     function handleSelectInput(selectElement) {
@@ -18,24 +23,36 @@
         const allTasks = document.querySelectorAll('.task');
 
         if (val === "ALL") {
-            return changeDisplay(allTasks, 'block');
+            return changeElement(allTasks, removeClass, 'hide');
         }
 
         if (val === "DONE") {
-            changeDisplay(allTasks, 'none');
-            return changeDisplay(doneTasks, 'block');
+            changeElement(allTasks, addClass, 'hide');
+            return changeElement(doneTasks, removeClass, 'hide');
         }
 
         if (val === "PENDING") {
-            changeDisplay(allTasks, 'none');
-            return changeDisplay(pendingTasks, 'block');
+            changeElement(allTasks, addClass, 'hide');
+            return changeElement(pendingTasks, removeClass, 'hide');
         }
     }
 
-    function changeDisplay(elems, value) {
+    function changeElement(elems, changeFunc, ...params) {
         elems.forEach((elem) => {
-            elem.style.display = value;
-        })
+            changeFunc(elem, ...params);
+        });
+    }
+
+    function addClass(elem, className) {
+        if (!elem.classList.contains(className)) {
+            elem.classList.add(className);
+        }
+    }
+
+    function removeClass(elem, className) {
+        if (elem.classList.contains(className)) {
+            elem.classList.remove(className);
+        }
     }
 </script>
 

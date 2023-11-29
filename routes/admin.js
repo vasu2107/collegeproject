@@ -12,7 +12,7 @@ const manageTaskHandler = async (req, res) => {
     });
 };
 
-router.get("/abc", manageTaskHandler);
+router.get("/manageTasks", manageTaskHandler);
 
 module.exports = router;
 
